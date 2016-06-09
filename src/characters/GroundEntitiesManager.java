@@ -6,27 +6,26 @@ import java.util.Iterator;
 import java.util.List;
 
 public class GroundEntitiesManager {
-	private static List<Entity> groundEntities = new ArrayList<>(); 
+	private List<Entity> groundEntities;
 	
-	public static boolean addGroundItem(Entity entity){
+	public GroundEntitiesManager(){
+		groundEntities = new ArrayList<>(); 
+	}
+	
+	public boolean addGroundItem(Entity entity){
 		return groundEntities.add(entity);
 	}
 	
-	public static void updateGroundItems() {
+	public void draw(Graphics g){
 		Iterator<Entity> iter = groundEntities.iterator();
 		while (iter.hasNext()) {
 			Entity entity = iter.next();
 			if (entity.isValid()) {
 				entity.tick();
+				entity.draw(g);
 			} else {
 				iter.remove();
 			}
-		}
-	}
-	
-	public static void draw(Graphics g){
-		for(Entity entity : groundEntities){
-			entity.draw(g);
 		}
 	}
 }

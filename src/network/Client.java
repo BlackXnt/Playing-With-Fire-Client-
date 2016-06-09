@@ -7,6 +7,7 @@ import java.io.OutputStreamWriter;
 import java.net.Socket;
 
 import board.Board;
+import characters.GroundEntitiesManager;
 import characters.PlayersManager;
 
 public class Client {
@@ -14,16 +15,19 @@ public class Client {
 	private BufferedWriter out;
 	private static PlayersManager playersManager;
 	private static NetworkMessenger networkMessenger;
+	private static GroundEntitiesManager groundEntitiesManager;
+	private static Board board;
 
 	public Client(String ip, int port) {
 		try {
 			socket = new Socket(ip, port);
 			out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
 			playersManager = new PlayersManager();
+			groundEntitiesManager = new GroundEntitiesManager();
 			networkMessenger = new NetworkMessenger(this);
 			Thread read = new Thread(new NetworkListener(socket));
 			read.start();
-			Board board = new Board();
+			board = new Board();
 		} catch (IOException e) {
 			System.err.println("Couldn't get I/O for the connection to server.");
 			System.exit(1);
@@ -36,6 +40,14 @@ public class Client {
 
 	public static PlayersManager getPlayersManager() {
 		return playersManager;
+	}
+	
+	public static GroundEntitiesManager getGroundEntitiesManager() {
+		return groundEntitiesManager;
+	}
+	
+	public static Board getBoard(){
+		return board;
 	}
 	
 	public void send(String line) {

@@ -12,7 +12,6 @@ public class PlayerKeyListener implements KeyListener {
 
 	public PlayerKeyListener(NetworkMessenger networkMessenger) {
 		this.networkMessenger = networkMessenger;
-		System.out.println(1);
 	}
 
 	@Override

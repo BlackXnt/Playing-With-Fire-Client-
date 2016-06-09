@@ -1,14 +1,11 @@
 package network;
 
-import java.io.BufferedReader;
+import java.awt.Rectangle;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.OptionalDataException;
 import java.net.Socket;
-import java.net.SocketException;
 
-import board.Board;
 import board.GamePanel;
 import map.GameMap;
 
@@ -30,7 +27,11 @@ public class NetworkListener implements Runnable{
 						CommandWrapper cw = new CommandWrapper(((String) serverObject));
 						cw.execute();
 					} else if (serverObject instanceof GameMap) {
-						GamePanel.setCurrentMap(((GameMap) serverObject));
+						//System.out.println(10000);
+						if(Client.getBoard() != null){
+							Client.getBoard().getGamePanel().setCurrentMap(((GameMap) serverObject));
+							//System.out.println(((GameMap) serverObject).getInteractingTilesTypes(new Rectangle(0, 0, 200, 200)));
+						}
 					}
 				} catch (OptionalDataException e) {
 					e.printStackTrace();

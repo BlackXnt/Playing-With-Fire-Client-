@@ -32,4 +32,8 @@ public class Board {
 		//TODO:remove this
 		frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
 	}
+	
+	public GamePanel getGamePanel(){
+		return gamePanel;
+	}
 }

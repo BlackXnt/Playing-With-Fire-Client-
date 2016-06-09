@@ -1,6 +1,8 @@
 package network;
 
+import characters.Bomb;
 import characters.Direction;
+import characters.GroundEntitiesManager;
 import characters.Player;
 import characters.PlayersManager;
 
@@ -36,6 +38,12 @@ public class CommandWrapper {
 			default:
 				break;
 			}
-		} 
+		} else if (content[0].equals("entity")){
+			switch (content[1]) {
+			case "bomb":
+				System.out.println(3000);
+				Client.getGroundEntitiesManager().addGroundItem(new Bomb(Integer.parseInt(content[2]), Integer.parseInt(content[3])));
+			}
+		}
 	}
 }

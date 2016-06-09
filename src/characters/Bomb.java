@@ -22,37 +22,23 @@ public class Bomb extends Entity {
 	private int row;
 	private int col;
 
-	//The player that placed the bomb
-	private Player placer; 
-	
-	// The GamePanel and the map the bomb is in.
-	private GamePanel gamePanel;
-	private GameMap map;
-
 	private static final int CYCLES_TO_DETONATE = 100;
 	private static final int CYCLES_TO_INVALIDATION = 120;
 	private int cyclesPerChange = CYCLES_TO_DETONATE / (rows * cols);
 	private int changesCompleted = 1;
 	private int currentCycle;
-	private boolean exploded = false;
-	private int power = 4;
 
-	public Bomb(int x, int y, Player placer, GamePanel gamePanel) {
+	public Bomb(int x, int y) {
 		super(x, y, bombWidth, bombHeight);
-		this.gamePanel = gamePanel;
-		this.placer = placer;
-		map = gamePanel.getCurrentMap();
 	}
 	
-	public Bomb(Location location, Player placer, GamePanel gamePanel) {
+	public Bomb(Location location) {
 		super(location, bombWidth, bombHeight);
-		this.gamePanel = gamePanel;
-		this.placer = placer;
-		map = gamePanel.getCurrentMap();
 	}
 
 	@Override
 	public void tick() {
+		System.out.println(4000);
 		if (currentCycle <= CYCLES_TO_DETONATE) {
 			if (currentCycle - (cyclesPerChange * changesCompleted) >= 0 && changesCompleted != rows * cols) {
 				changesCompleted++;
@@ -63,13 +49,15 @@ public class Bomb extends Entity {
 					col++;
 				}
 			}
+		} else if(currentCycle >= CYCLES_TO_INVALIDATION){
+			valid = false;
 		}
 		currentCycle++;
 	}
 
 	@Override
 	public void draw(Graphics g) {
-		if (exploded == false && valid == true) {
+		if (valid == true) {
 			g.drawImage(picts[row][col], location.getX(), location.getY(), picts[row][col].getWidth(null) * 2,
 					picts[row][col].getHeight(null) * 2, null); // 16 27
 		}

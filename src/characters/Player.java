@@ -13,6 +13,7 @@ import map.GameMap;
 import map.Location;
 import map.TileType;
 import misc.Util;
+import network.Client;
 
 public class Player extends MovingEntity{
 
@@ -70,6 +71,15 @@ public class Player extends MovingEntity{
 			col++;
 			col = col % cols;
 		}
+/*		if(Client.getBoard() != null){
+			System.out.println(Client.getBoard().getGamePanel());
+			if(Client.getBoard().getGamePanel() != null){
+				System.out.println(Client.getBoard().getGamePanel().getCurrentMap());
+			}
+		}*/
+/*		if(Client.getBoard() != null && Client.getBoard().getGamePanel() != null && Client.getBoard().getGamePanel().getCurrentMap() != null){
+			System.out.println(Client.getBoard().getGamePanel().getCurrentMap().getInteractingTilesTypes(getBounds()));
+		}*/
 	}
 	
 	@Override

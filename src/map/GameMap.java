@@ -63,8 +63,7 @@ public class GameMap extends JPanel implements Serializable{
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		// Clear the board
-		 g.clearRect(0, 0, getWidth(), getHeight());
-
+		g.clearRect(0, 0, getWidth(), getHeight());
 		int x = 0, y = 0, j;
 		Tile lastTile = tiles[0][0];
 		for (int i = 0; i < tiles.length; i++) {
